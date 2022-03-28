@@ -1,6 +1,7 @@
 import "package:http/http.dart" as http;
 import 'dart:async';
 import 'dart:convert';
+import "dart:io";
 
 Future<void> printBbCharacters() async {
   try {
@@ -9,9 +10,9 @@ Future<void> printBbCharacters() async {
     );
     var resJson = jsonDecode(response.body);
     for (var i = 0; i < resJson.length; i++) {
-      print(resJson[i]["name"]);
+      stdout.write("${resJson[i]["name"]}\n");
     }
   } catch (e) {
-    print(e);
+    stdout.write(e);
   }
 }
