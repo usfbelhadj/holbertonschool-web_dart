@@ -13,7 +13,6 @@ Future<void> printBbCharacters() async {
     for (var i = 0; i < resJson.length; i++) {
       print(resJson[i]["name"]);
     }
-    print("\n");
   } else {
     // If the server did not return a 200 OK response, then throw an exception.
     throw Exception('Failed to load album');
