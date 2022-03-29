@@ -1,4 +1,4 @@
-name: breaking_bad
+name: quotes.dart
 
 dependencies:
   http: ^0.13.3
