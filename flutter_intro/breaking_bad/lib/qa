@@ -1,0 +1,60 @@
+// ignore_for_file: avoid_print
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import 'dart:async';
+import 'dart:convert';
+import 'character_tile.dart';
+import 'models.dart';
+import 'quotes_screen.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  Future<Character> fetchBbCharacters() async {
+    late Character char;
+    late List listChar = [];
+    final response = await http.get(
+      Uri.parse('https://www.breakingbadapi.com/api/characters'),
+    );
+    if (response.statusCode == 200) {
+      var res = jsonDecode(response.body);
+      for (var i = 0; i < res.length; i++) {
+        char = Character.fromJson(res[i]);
+        listChar.add(char.toJson());
+      }
+    }
+
+    return char;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Breaking Bad"),
+      ),
+      body: FutureBuilder(
+        future: fetchBbCharacters(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return const SizedBox(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            default:
+              if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                final Character char;
+                return CharacterTile(character: char);
+              }
+          }
+        },
+      ),
+    );
+  }
+}
