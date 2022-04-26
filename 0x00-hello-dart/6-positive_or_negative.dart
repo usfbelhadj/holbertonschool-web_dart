@@ -2,10 +2,10 @@ void main(List<String> args) {
   var number = int.parse(args[0]);
 
   if (number > 0) {
-    print("OK $number");
+    print("$number is positive");
   } else if (number < 0) {
-    print("NOT OK $number");
+    print("$number is negative");
   } else {
-    print("0");
+    print("0 is zero");
   }
 }
