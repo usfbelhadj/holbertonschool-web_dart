@@ -5,14 +5,14 @@ class User extends Password {
   String name;
   int age;
   double height;
-
-  final pass = Password(password: "Testing67");
+  String? user_password;
 
   User(
       {int? this.id,
       required this.name,
       required this.age,
-      required this.height});
+      required this.height,
+      String? this.user_password});
 
   Map toJson() {
     return {"id": id, "name": name, "age": age, "height": height};
@@ -27,6 +27,8 @@ class User extends Password {
   }
 
   @override
-  String toString() =>
-      'User(id : $id ,name: $name,  age: $age, height: $height, Password: ${pass.isValid()})';
+  String toString() {
+    final pass = Password(password: user_password);
+    return 'User(id : $id ,name: $name,  age: $age, height: $height, Password: ${pass.isValid()})';
+  }
 }

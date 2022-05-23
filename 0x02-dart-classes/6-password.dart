@@ -12,10 +12,11 @@ class Password {
     bool lowerLetter = false;
 
     bool number = false;
-    if (_password!.length >= 8 && _password!.length < 16) {
+    if ((_password?.length ?? 0) >= 8 && (_password?.length ?? 0) < 16) {
       int i = 0;
 
-      while (i < _password!.length && !(number && upperLetter && lowerLetter)) {
+      while (i < (_password?.length ?? 0) &&
+          !(number && upperLetter && lowerLetter)) {
         if (_password!.codeUnitAt(i) >= 'A'.codeUnitAt(0) &&
             _password!.codeUnitAt(i) <= "Z".codeUnitAt(0))
           upperLetter = true;
@@ -40,13 +41,4 @@ class Password {
   String toString() {
     return "Your Password is: $_password";
   }
-}
-
-void main() {
-  final password = Password(password: "Passwordecode");
-  print(password.isValid());
-  print(password.toString());
-  password.password = "Youssef4321";
-  print(password.isValid());
-  print(password.toString());
 }
