@@ -13,10 +13,14 @@ Future<String> greetUser() async {
 }
 
 Future<String> loginUser() async {
-  var checkc = await checkCredentials();
-  print("There is a user: $checkc");
-  if (checkc == true) {
-    return greetUser();
+  try {
+    var checkc = await checkCredentials();
+    print("There is a user: $checkc");
+    if (checkc == true) {
+      return greetUser();
+    }
+    return "Wrong credentials";
+  } catch (e) {
+    return "error caught: ${e}";
   }
-  return "Wrong credentials";
 }
